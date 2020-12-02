@@ -4,11 +4,13 @@
 # Press Double ⇧ to search everywhere for classes, files, tool windows, actions, and settings.、
 
 import matplotlib.image as mpimg  # mpimg 用于读取图片
-import numpy as np
 import os
+from sklearn.neighbors import KNeighborsClassifier
+
 
 train_data = []
 train_result = []
+knn = KNeighborsClassifier(n_neighbors=1)
 
 train_dir = "data/train"
 
@@ -20,7 +22,7 @@ def image_vectorize(name):
         data.extend(each)
 
     train_data.append(data)
-    print(data)
+    # print(data)
     # Use a breakpoint in the code line below to debug your script.
     print(f'Hi, {name}')  # Press ⌘F8 to toggle the breakpoint.
 
@@ -36,10 +38,16 @@ def traverse_dir():
             train_result.extend(dir)
 
 
+def train():
+    knn.fit(train_data, train_result)
+
+
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
     traverse_dir()
-    print(train_data)
+    train()
+
+    # print(train_data)
     print(train_result)
     ## print_hi('PyCharm')aa
 
