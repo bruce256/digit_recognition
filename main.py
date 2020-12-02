@@ -41,6 +41,6 @@ if __name__ == '__main__':
     traverse_dir()
     print(train_data)
     print(train_result)
-    ## print_hi('PyCharm')
+    ## print_hi('PyCharm')aa
 
 # See PyCharm help at https://www.jetbrains.com/help/pycharm/
