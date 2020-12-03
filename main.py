@@ -10,7 +10,7 @@ from sklearn.neighbors import KNeighborsClassifier
 
 train_data = []
 train_result = []
-knn = KNeighborsClassifier(n_neighbors=1)
+knn = KNeighborsClassifier(n_neighbors=9)
 
 train_dir = "data/train"
 
