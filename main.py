@@ -8,7 +8,6 @@ import matplotlib.image as mpimg  # mpimg 用于读取图片
 import os
 from sklearn.neighbors import KNeighborsClassifier
 
-
 train_data = []
 train_result = []
 knn = KNeighborsClassifier(n_neighbors=1)
@@ -18,10 +17,14 @@ train_dir = "data/train"
 
 def image_vectorize(name):
     data = []
-    lena = mpimg.imread(name)  # 读取和代码处于同一目录下的 lena.png
-    for each in lena:
-        data.extend(each)
-    print(len(data))
+    image = mpimg.imread(name)
+    for each in image:
+        for e in each:
+            if e == 255:
+                data.append(0)
+            else:
+                data.append(1)
+    #print((data))
     train_data.append(data)
     # print(data)
     # Use a breakpoint in the code line below to debug your script.
@@ -36,7 +39,7 @@ def traverse_dir():
         files = os.listdir(current_dir)
         for file in files:
             image_vectorize(current_dir + "/" + file)
-            train_result.extend(dir)
+            train_result.append(dir)
 
 
 def train():
@@ -45,11 +48,13 @@ def train():
 
 def test_image_vectorize():
     data = []
-    lena = mpimg.imread("data/test/test_8.bmp")  # 读取和代码处于同一目录下的 lena.png
-    #print(lena)
-    for each in lena:
+    image = mpimg.imread("data/test/test_9.bmp")
+    for each in image:
         for e in each:
-            data.extend(e)
+            if e[0] == 255:
+                data.append(0)
+            else:
+                data.append(1)
 
     print(len(data))
     tmp = [data]
@@ -62,9 +67,12 @@ if __name__ == '__main__':
     train()
     test_vec = test_image_vectorize()
     print(test_vec)
+    print(train_result)
+    print(len(train_result))
+    print(len(train_data))
     predict_result = knn.predict(test_vec)
     # print(train_data)
-    #print(train_result)
+    # print(train_result)
     print(predict_result)
     time.sleep(100000)
     ## print_hi('PyCharm')aa
