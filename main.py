@@ -26,6 +26,7 @@ def image_vectorize(name):
                 data.append(1)
     #print((data))
     train_data.append(data)
+    return data
     # print(data)
     # Use a breakpoint in the code line below to debug your script.
     # print(f'Hi, {name}')  # Press ⌘F8 to toggle the breakpoint.
@@ -65,12 +66,12 @@ def test_image_vectorize():
 if __name__ == '__main__':
     traverse_dir()
     train()
-    test_vec = test_image_vectorize()
+    test_vec = image_vectorize(train_dir + "/3/3_1.bmp") #test_image_vectorize()
     print(test_vec)
     print(train_result)
     print(len(train_result))
     print(len(train_data))
-    predict_result = knn.predict(test_vec)
+    predict_result = knn.predict([test_vec])
     # print(train_data)
     # print(train_result)
     print(predict_result)
