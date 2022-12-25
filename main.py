@@ -6,13 +6,16 @@ import time
 
 import matplotlib.image as mpimg  # mpimg 用于读取图片
 import os
+
+import numpy
 from sklearn.neighbors import KNeighborsClassifier
 
 train_data = []
 train_result = []
 knn = KNeighborsClassifier(n_neighbors=9)
 
-train_dir = "data/train"
+train_dir = "data/train/"
+test_dir = "data/test/"
 
 
 def image_vectorize(name):
@@ -20,10 +23,16 @@ def image_vectorize(name):
     image = mpimg.imread(name)
     for each in image:
         for e in each:
-            if e == 255:
-                data.append(0)
+            if isinstance(e, numpy.ndarray):
+                if e[0] == 255:
+                    data.append(0)
+                else:
+                    data.append(1)
             else:
-                data.append(1)
+                if e == 255:
+                    data.append(0)
+                else:
+                    data.append(1)
     #print((data))
     train_data.append(data)
     return data
@@ -66,7 +75,7 @@ def test_image_vectorize():
 if __name__ == '__main__':
     traverse_dir()
     train()
-    test_vec = image_vectorize(train_dir + "/3/3_1.bmp") #test_image_vectorize()
+    test_vec = image_vectorize(test_dir + "test_9.bmp") #test_image_vectorize()
     print(test_vec)
     print(train_result)
     print(len(train_result))
