@@ -16,8 +16,8 @@ from sklearn.neural_network import MLPClassifier
 train_data = []
 train_result = []
 # clf = KNeighborsClassifier(n_neighbors=9)
-# clf = svm.SVC()
-clf = tree.DecisionTreeClassifier()
+clf = svm.SVC()
+# clf = tree.DecisionTreeClassifier()
 # clf = clf = MLPClassifier(solver='lbfgs', alpha=1e-5,  hidden_layer_sizes=(5, 2), random_state=1)
 
 train_dir = "data/train/"
@@ -39,7 +39,7 @@ def image_vectorize(name):
                     data.append(0)
                 else:
                     data.append(1)
-    #print((data))
+    # print((data))
     train_data.append(data)
     return data
     # print(data)
@@ -78,20 +78,24 @@ def test_image_vectorize():
     return tmp
 
 
+def test():
+    dirs = os.listdir(test_dir)
+    print(dirs)
+    for dir in dirs:
+        print(dir)
+        test_vec = image_vectorize(test_dir + '/' + dir)
+        predict_result = clf.predict([test_vec])
+        # print(train_data)
+        # print(train_result)
+        print("预测结果:")
+        print(predict_result)
+
+
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
     traverse_dir()
     train()
-    test_vec = image_vectorize(test_dir + "test_9.bmp") #test_image_vectorize()
-    # print(test_vec)
-    # print(train_result)
-    # print(len(train_result))
-    # print(len(train_data))
-    predict_result = clf.predict([test_vec])
-    # print(train_data)
-    # print(train_result)
-    print("预测结果:")
-    print(predict_result)
+    test()
     ## print_hi('PyCharm')aa
 
 # See PyCharm help at https://www.jetbrains.com/help/pycharm/
