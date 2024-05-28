@@ -9,10 +9,16 @@ import os
 
 import numpy
 from sklearn.neighbors import KNeighborsClassifier
+from sklearn import svm
+from sklearn import tree
+from sklearn.neural_network import MLPClassifier
 
 train_data = []
 train_result = []
-knn = KNeighborsClassifier(n_neighbors=9)
+# clf = KNeighborsClassifier(n_neighbors=9)
+# clf = svm.SVC()
+clf = tree.DecisionTreeClassifier()
+# clf = clf = MLPClassifier(solver='lbfgs', alpha=1e-5,  hidden_layer_sizes=(5, 2), random_state=1)
 
 train_dir = "data/train/"
 test_dir = "data/test/"
@@ -53,7 +59,8 @@ def traverse_dir():
 
 
 def train():
-    knn.fit(train_data, train_result)
+    clf.fit(train_data, train_result)
+    # knn.fit(train_data, train_result)
 
 
 def test_image_vectorize():
@@ -76,15 +83,15 @@ if __name__ == '__main__':
     traverse_dir()
     train()
     test_vec = image_vectorize(test_dir + "test_9.bmp") #test_image_vectorize()
-    print(test_vec)
-    print(train_result)
-    print(len(train_result))
-    print(len(train_data))
-    predict_result = knn.predict([test_vec])
+    # print(test_vec)
+    # print(train_result)
+    # print(len(train_result))
+    # print(len(train_data))
+    predict_result = clf.predict([test_vec])
     # print(train_data)
     # print(train_result)
+    print("预测结果:")
     print(predict_result)
-    time.sleep(100000)
     ## print_hi('PyCharm')aa
 
 # See PyCharm help at https://www.jetbrains.com/help/pycharm/
